@@ -21,10 +21,10 @@ public class Solution105 {
         for (int i = 0; i < n; i++) {
             indexMap.put(inorder[i], i);
         }
-        return build(preorder, inorder, 0, n - 1, 0, n - 1);
+        return build(preorder, 0, n - 1, 0);
     }
 
-    public TreeNode build(int[] preorder, int[] inorder, int preorderLeft, int preorderRight, int inorderLeft, int inorderRight) {
+    public TreeNode build(int[] preorder, int preorderLeft, int preorderRight, int inorderLeft) {
         if (preorderLeft > preorderRight) {
             return null;
         }
@@ -38,8 +38,8 @@ public class Solution105 {
         // 左子树个数
         int leftSize = inorderRoot - inorderLeft;
 
-        root.left = build(preorder, inorder, preorderLeft + 1, preorderLeft + leftSize, inorderLeft, inorderRoot - 1);
-        root.right = build(preorder, inorder, preorderLeft + leftSize + 1, preorderRight, inorderRoot + 1, inorderRight);
+        root.left = build(preorder, preorderLeft + 1, preorderLeft + leftSize, inorderLeft);
+        root.right = build(preorder, preorderLeft + leftSize + 1, preorderRight, inorderRoot + 1);
         return root;
     }
 }
